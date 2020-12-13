@@ -23,6 +23,8 @@ public class DataStructures {
     private static  int[] counter = new int[128];
     /**
      * @param args the command line arguments
+     * @throws java.io.FileNotFoundException
+     * @throws java.io.IOException
      */
     public static void main(String[] args) throws FileNotFoundException, IOException {
 
@@ -31,12 +33,12 @@ public class DataStructures {
         for (int y = 0; y < 128; y++) { //initialises array
             counter[y] = 0;
         }
-        URL pride = new URL("https://www.gutenberg.org/files/1342/1342-0.txt");
-        ReadUrl(pride);
+        URL pride = new URL("https://www.gutenberg.org/files/1342/1342-0.txt"); 
+        countCharacters(pride);
         URL alice = new URL("https://www.gutenberg.org/files/11/11-0.txt");
-        ReadUrl(alice);
+        countCharacters(alice);
         URL moby = new URL("https://www.gutenberg.org/files/2701/2701-0.txt");
-        ReadUrl(moby);
+        countCharacters(moby);
 
         File file = new File("frequencies.dat");
         DataOutputStream output = new DataOutputStream(new FileOutputStream(file));
@@ -52,7 +54,12 @@ public class DataStructures {
         }
     }
     
-    public static void ReadUrl(URL book) throws IOException{
+    /**
+     *
+     * @param book
+     * @throws IOException
+     */
+    public static void countCharacters(URL book) throws IOException{
         
       BufferedReader in = new BufferedReader( new InputStreamReader(book.openStream()));
       String line;
