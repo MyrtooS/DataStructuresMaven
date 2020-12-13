@@ -12,29 +12,50 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.URL;
 
 /**
  *
  * @author it21771 it21794
  */
 public class DataStructures {
-
+    private static  int[] counter = new int[128];
     /**
      * @param args the command line arguments
      */
     public static void main(String[] args) throws FileNotFoundException, IOException {
 
-        int[] counter = new int[128];
+        //int[] counter = new int[128];
 
         for (int y = 0; y < 128; y++) { //initialises array
             counter[y] = 0;
         }
+        URL pride = new URL("https://www.gutenberg.org/files/1342/1342-0.txt");
+        ReadUrl(pride);
+        URL alice = new URL("https://www.gutenberg.org/files/11/11-0.txt");
+        ReadUrl(alice);
+        URL moby = new URL("https://www.gutenberg.org/files/2701/2701-0.txt");
+        ReadUrl(moby);
 
-        File input = new File("/home/anna/characteroutput.txt"); //characteroutput.txt contains all three books, unique path for every user.
+        File file = new File("frequencies.dat");
+        DataOutputStream output = new DataOutputStream(new FileOutputStream(file));
+        for (int k = 0; k < 128; k++) { // adds data from array to file frequencies.dat
+            output.writeBytes((char) k + ": " + counter[k] + "\n");
+            //output.writeBytes(k + ": " + counter[k] + "\n"); 
+        }
 
-        BufferedReader in = new BufferedReader(new FileReader(input));
-
-        String line;
+        BufferedReader br = new BufferedReader(new FileReader("frequencies.dat"));
+        String line1;
+        while ((line1 = br.readLine()) != null) { //prints results
+            System.out.println(line1);
+        }
+    }
+    
+    public static void ReadUrl(URL book) throws IOException{
+        
+      BufferedReader in = new BufferedReader( new InputStreamReader(book.openStream()));
+      String line;
         while ((line = in.readLine()) != null) {
             //System.out.println(line);
             for (int i = 0; i < line.length(); i++) {
@@ -51,19 +72,6 @@ public class DataStructures {
 
         }
         in.close();
-
-        File file = new File("frequencies.dat");
-        DataOutputStream output = new DataOutputStream(new FileOutputStream(file));
-        for (int k = 0; k < 128; k++) { // adds data from array to file frequencies.dat
-            output.writeBytes((char) k + ": " + counter[k] + "\n");
-            //output.writeBytes(k + ": " + counter[k] + "\n"); 
-        }
-
-        BufferedReader br = new BufferedReader(new FileReader("frequencies.dat"));
-        String line1;
-        while ((line1 = br.readLine()) != null) { //prints results
-            System.out.println(line1);
-        }
     }
 
 }
