@@ -31,9 +31,7 @@ public class DataStructures {
 
         //int[] counter = new int[128];
 
-        for (int y = 0; y < 128; y++) { //initialises array
-            counter[y] = 0;
-        }
+        
         URL pride = new URL("https://www.gutenberg.org/files/1342/1342-0.txt"); 
         countCharacters(pride);
         URL alice = new URL("https://www.gutenberg.org/files/11/11-0.txt");
@@ -41,10 +39,18 @@ public class DataStructures {
         URL moby = new URL("https://www.gutenberg.org/files/2701/2701-0.txt");
         countCharacters(moby);
 
+        
+       
+        
+    }
+    public static File ReadFile() throws FileNotFoundException, IOException{
+        for (int y = 0; y < 128; y++) { //initialises array
+            counter[y] = 0;
+        }
         File file = new File("frequencies.dat");
         DataOutputStream output = new DataOutputStream(new FileOutputStream(file));
         for (int k = 0; k < 128; k++) { // adds data from array to file frequencies.dat
-            output.writeBytes((char) k + ": " + counter[k] + "\n");
+            output.writeBytes( counter[k] + "\n");
             //output.writeBytes(k + ": " + counter[k] + "\n"); 
         }
 
@@ -53,6 +59,7 @@ public class DataStructures {
         while ((line1 = br.readLine()) != null) { //prints results
             System.out.println(line1);
         }
+        return file;
     }
     
     /**
@@ -81,7 +88,6 @@ public class DataStructures {
         }
         in.close();
     }
-    HuffmanTree huffmanTree = new HuffmanTree();
-    huffmanTree.
+    
 
 }
