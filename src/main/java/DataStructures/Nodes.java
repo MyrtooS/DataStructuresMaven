@@ -20,12 +20,15 @@ public class Nodes {
         this.frequency = frequency;
         this.character = character;
     }
-
-    public Nodes(int frequency, Nodes child1, Nodes child2) {
-        this.frequency = frequency;
-        this.child1 = child1;
-        this.child2 = child2;
+    public Nodes(){
+    
     }
+
+//    public Nodes(int frequency, Nodes child1, Nodes child2) {
+//        this.frequency = frequency;
+//        this.child1 = child1;
+//        this.child2 = child2;
+//    }
   
     
     public int getFrequency() {

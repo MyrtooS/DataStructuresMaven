@@ -18,7 +18,7 @@ import java.util.PriorityQueue;
  */
 public class HuffmanTree {
 
-    public PriorityQueue<Nodes> tree = new PriorityQueue<Nodes>();
+    public static PriorityQueue<Nodes> tree = new PriorityQueue<Nodes>();
 
     public PriorityQueue<Nodes> getTree() {
         return tree;
@@ -30,14 +30,23 @@ public class HuffmanTree {
 
     public static void FileToNode() {
         try {
-            
+            int AsciiValue;
+            int counter = 0;
             BufferedReader br = new BufferedReader(new FileReader(DataStructures.ReadFile()));
             String line1;
-            while ((line1 = br.readLine()) != null) { 
-                for(int i=0;i<128;i++){
-                char character= (char)line1.charAt(i);
-                System.out.println(character);
-                        }
+            while ((line1 = br.readLine()) != null) {
+                AsciiValue = Integer.parseInt(line1);
+
+                System.out.print(AsciiValue + "\n");
+              
+               Nodes node=new Nodes();
+               node.setCharacter((char) counter);
+               node.setFrequency(AsciiValue);
+               tree.add(node);
+               
+               counter++;
+               
+                //    }
             }
         } catch (Exception e) {
             System.out.println("An Exception Occured");
