@@ -9,8 +9,8 @@ package DataStructures;
  *
  * @author myrto
  */
-public class Nodes {
-    
+public class Nodes implements Comparable<Nodes> {
+
     int frequency;
     char character;
     Nodes child1;
@@ -20,8 +20,9 @@ public class Nodes {
         this.frequency = frequency;
         this.character = character;
     }
-    public Nodes(){
-    
+
+    public Nodes() {
+
     }
 
 //    public Nodes(int frequency, Nodes child1, Nodes child2) {
@@ -29,8 +30,6 @@ public class Nodes {
 //        this.child1 = child1;
 //        this.child2 = child2;
 //    }
-  
-    
     public int getFrequency() {
         return frequency;
     }
@@ -62,9 +61,22 @@ public class Nodes {
     public void setChild2(Nodes child2) {
         this.child2 = child2;
     }
-    
-    
-    
-    
-    
+
+    @Override
+    public int compareTo(Nodes o) {
+        //throw new UnsupportedOperationException("Not supported yet.");
+
+        Nodes node1 = new Nodes();
+        Nodes node2 = new Nodes();
+        if (node1.getFrequency() < node2.getFrequency()) {
+            
+            return -1;
+        }
+         if (node1.getFrequency() > node2.getFrequency()) {
+            
+            return 1;
+        }
+        return 0;
+    }
+
 }

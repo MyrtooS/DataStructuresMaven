@@ -7,10 +7,16 @@ package DataStructures;
 
 import DataStructures.*;
 import java.io.BufferedReader;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.PriorityQueue;
+import java.util.Scanner;
 
 /**
  *
@@ -28,30 +34,30 @@ public class HuffmanTree {
         this.tree = tree;
     }
 
-    public static void FileToNode() {
-        try {
+    public static void FileToNode(File file) throws FileNotFoundException, IOException {
+        
             int AsciiValue;
             int counter = 0;
-            BufferedReader br = new BufferedReader(new FileReader(DataStructures.ReadFile()));
+            DataInputStream input = new DataInputStream(new FileInputStream(file));
             String line1;
-            while ((line1 = br.readLine()) != null) {
+            while ((line1 = input.readLine()) != null) {
                 AsciiValue = Integer.parseInt(line1);
+                 
+                
+                Nodes node = new Nodes();
+                node.setCharacter((char) counter);
+                node.setFrequency(AsciiValue);
+                node.setChild1(null);
+                node.setChild2(null);
+          
+                tree.add(node);
 
-                System.out.print(AsciiValue + "\n");
-              
-               Nodes node=new Nodes();
-               node.setCharacter((char) counter);
-               node.setFrequency(AsciiValue);
-               tree.add(node);
-               
-               counter++;
-               
-                //    }
+                counter++;
+
+                //    
             }
-        } catch (Exception e) {
-            System.out.println("An Exception Occured");
-        }
+    }
 
     }
 
-}
+

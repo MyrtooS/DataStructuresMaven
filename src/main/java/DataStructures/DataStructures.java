@@ -40,8 +40,8 @@ public class DataStructures {
         countCharacters(alice);
         URL moby = new URL("https://www.gutenberg.org/files/2701/2701-0.txt");
         countCharacters(moby);
-        ReadFile();
-        HuffmanTree.FileToNode();
+        File file=ReadFile();
+        HuffmanTree.FileToNode(file);
         
        
         
@@ -61,9 +61,9 @@ public class DataStructures {
         while ((line1 = br.readLine()) != null) { //prints results
             System.out.println(line1);
         }
-        return file;
-    }
+         return file;
     
+    }
     /**
      *
      * @param book
