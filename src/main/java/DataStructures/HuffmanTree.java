@@ -35,29 +35,44 @@ public class HuffmanTree {
     }
 
     public static void FileToNode(File file) throws FileNotFoundException, IOException {
-        
-            int AsciiValue;
-            int counter = 0;
-            DataInputStream input = new DataInputStream(new FileInputStream(file));
-            String line1;
-            while ((line1 = input.readLine()) != null) {
-                AsciiValue = Integer.parseInt(line1);
-                 
-                
-                Nodes node = new Nodes();
-                node.setCharacter((char) counter);
-                node.setFrequency(AsciiValue);
-                node.setChild1(null);
-                node.setChild2(null);
-          
-                tree.add(node);
 
-                counter++;
+        int AsciiValue;
+        int counter = 0;
+        DataInputStream input = new DataInputStream(new FileInputStream(file));
+        String line1;
+        while ((line1 = input.readLine()) != null) {
+            AsciiValue = Integer.parseInt(line1);
 
-                //    
-            }
+            Nodes node = new Nodes();
+            node.setCharacter((char) counter);
+            node.setFrequency(AsciiValue);
+            node.setChild1(null);
+            node.setChild2(null);
+
+            tree.add(node);
+
+            counter++;
+            
+
+        }
+        MakeHuffmanTree(tree);
     }
 
+    public static File MakeHuffmanTree(PriorityQueue q) {
+        File file = new File("tree.dat");
+
+        while (q.isEmpty() == false) {
+
+            //q.poll();
+            //q
+            Nodes firstNode = (Nodes) q.peek();
+            q.poll();
+            Nodes secondNode = (Nodes) q.peek();
+            q.poll();
+
+        }
+        return file;
+
     }
 
-
+}

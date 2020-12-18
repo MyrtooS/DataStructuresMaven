@@ -66,16 +66,16 @@ public class Nodes implements Comparable<Nodes> {
     public int compareTo(Nodes o) {
         //throw new UnsupportedOperationException("Not supported yet.");
 
-        Nodes node1 = new Nodes();
-        Nodes node2 = new Nodes();
-        if (node1.getFrequency() < node2.getFrequency()) {
-            
-            return -1;
-        }
-         if (node1.getFrequency() > node2.getFrequency()) {
-            
-            return 1;
-        }
+//        Nodes node1 = new Nodes();
+//        Nodes node2 = new Nodes();
+//        if (node1.getFrequency() < node2.getFrequency()) {
+//            
+//            return -1;
+//        }
+//         if (node1.getFrequency() > node2.getFrequency()) {
+//            
+//            return 1;
+//        }
         return 0;
     }
 
