@@ -24,7 +24,7 @@ import java.util.Scanner;
  */
 public class HuffmanTree {
 
-    public static PriorityQueue<Nodes> tree = new PriorityQueue<Nodes>();
+    public static PriorityQueue<Nodes> tree = new PriorityQueue<Nodes>(128, new MyComparator());
 
     public PriorityQueue<Nodes> getTree() {
         return tree;
@@ -55,22 +55,39 @@ public class HuffmanTree {
             
 
         }
-        MakeHuffmanTree(tree);
+        MakeHuffmanTree();
     }
 
-    public static File MakeHuffmanTree(PriorityQueue q) {
+    public static File MakeHuffmanTree() {
         File file = new File("tree.dat");
-
-        while (q.isEmpty() == false) {
-
-            //q.poll();
-            //q
-            Nodes firstNode = (Nodes) q.peek();
-            q.poll();
-            Nodes secondNode = (Nodes) q.peek();
-            q.poll();
+        Nodes root = new Nodes();
+        while (tree.isEmpty() == false) {
+            
+            Nodes firstNode = tree.peek();
+            tree.poll();
+            Nodes secondNode = tree.peek();
+            tree.poll();
+            Nodes nNode = new Nodes();
+            int total = firstNode.getFrequency() + secondNode.getFrequency();
+            nNode.setFrequency(total);
+            nNode.setChild1(firstNode);
+            nNode.setChild2(secondNode);
+            root = nNode;
+            tree.add(root);
+            
+            
+//            
+//            System.out.println(firstNode.getFrequency());
+////            System.out.println(secondNode.getFrequency());
+//            int total = firstNode.getFrequency() + secondNode.getFrequency();
+//            n.setFrequency(total);
+//            n.setChild1(firstNode);
+//            n.setChild2(n);
+//            root = n;
+//            tree.add(root);
 
         }
+        
         return file;
 
     }

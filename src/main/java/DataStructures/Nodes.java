@@ -9,7 +9,7 @@ package DataStructures;
  *
  * @author myrto
  */
-public class Nodes implements Comparable<Nodes> {
+public class Nodes  {
 
     int frequency;
     char character;
@@ -25,11 +25,12 @@ public class Nodes implements Comparable<Nodes> {
 
     }
 
-//    public Nodes(int frequency, Nodes child1, Nodes child2) {
-//        this.frequency = frequency;
-//        this.child1 = child1;
-//        this.child2 = child2;
-//    }
+    public Nodes(int frequency, Nodes child1, Nodes child2) {
+        this.frequency = frequency;
+        this.child1 = child1;
+        this.child2 = child2;
+    }
+    
     public int getFrequency() {
         return frequency;
     }
@@ -62,21 +63,23 @@ public class Nodes implements Comparable<Nodes> {
         this.child2 = child2;
     }
 
-    @Override
-    public int compareTo(Nodes o) {
-        //throw new UnsupportedOperationException("Not supported yet.");
-
-//        Nodes node1 = new Nodes();
-//        Nodes node2 = new Nodes();
-//        if (node1.getFrequency() < node2.getFrequency()) {
-//            
-//            return -1;
-//        }
-//         if (node1.getFrequency() > node2.getFrequency()) {
-//            
-//            return 1;
-//        }
-        return 0;
-    }
+//    @Override
+//    public int compareTo(Nodes o) {
+//        return Integer.compare(this.getFrequency(), o.getFrequency());
+//        
+//        //throw new UnsupportedOperationException("Not supported yet.");
+//
+////        Nodes node1 = new Nodes();
+////        Nodes node2 = new Nodes();
+////        if (node1.getFrequency() < node2.getFrequency()) {
+////            
+////            return -1;
+////        }
+////         if (node1.getFrequency() > node2.getFrequency()) {
+////            
+////            return 1;
+////        }
+////        return 0;
+//    }
 
 }
