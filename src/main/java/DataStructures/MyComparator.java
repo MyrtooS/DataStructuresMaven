@@ -16,10 +16,10 @@ public class MyComparator implements Comparator<Nodes> {
     @Override
     public int compare(Nodes o1, Nodes o2) {
         if(o1.getFrequency() < o2.getFrequency()) {
-				return 1;
+				return -1;
 			}
 			else if(o1.getFrequency() > o2.getFrequency()) {
-				return -1;
+				return 1;
 			}
 			else {
 				return 0;

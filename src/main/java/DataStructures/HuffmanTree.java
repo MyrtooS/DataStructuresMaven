@@ -15,6 +15,8 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
+import java.util.Arrays;
 import java.util.PriorityQueue;
 import java.util.Scanner;
 
@@ -52,7 +54,6 @@ public class HuffmanTree {
             tree.add(node);
 
             counter++;
-            
 
         }
         MakeHuffmanTree();
@@ -61,8 +62,9 @@ public class HuffmanTree {
     public static File MakeHuffmanTree() {
         File file = new File("tree.dat");
         Nodes root = new Nodes();
-        while (tree.isEmpty() == false) {
-            
+        root = null;
+        while (tree.size() > 1) {
+
             Nodes firstNode = tree.peek();
             tree.poll();
             Nodes secondNode = tree.peek();
@@ -74,20 +76,21 @@ public class HuffmanTree {
             nNode.setChild2(secondNode);
             root = nNode;
             tree.add(root);
-            
-            
-//            
-//            System.out.println(firstNode.getFrequency());
-////            System.out.println(secondNode.getFrequency());
-//            int total = firstNode.getFrequency() + secondNode.getFrequency();
-//            n.setFrequency(total);
-//            n.setChild1(firstNode);
-//            n.setChild2(n);
-//            root = n;
-//            tree.add(root);
 
         }
-        
+        try {
+            Nodes[] nodes = tree.toArray(new Nodes[tree.size()]);
+            Arrays.sort(nodes, tree.comparator());
+
+            for (Nodes n : nodes) {
+                FileOutputStream fos = new FileOutputStream(file);
+                ObjectOutputStream output = new ObjectOutputStream(fos);
+                output.writeUnshared(n);
+            }
+            
+        } catch (Exception e) {
+
+        }
         return file;
 
     }

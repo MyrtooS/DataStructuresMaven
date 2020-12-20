@@ -5,11 +5,13 @@
  */
 package DataStructures;
 
+import java.io.Serializable;
+
 /**
  *
  * @author myrto
  */
-public class Nodes  {
+public class Nodes implements Serializable {
 
     int frequency;
     char character;
