@@ -65,23 +65,5 @@ public class Nodes implements Serializable {
         this.child2 = child2;
     }
 
-//    @Override
-//    public int compareTo(Nodes o) {
-//        return Integer.compare(this.getFrequency(), o.getFrequency());
-//        
-//        //throw new UnsupportedOperationException("Not supported yet.");
-//
-////        Nodes node1 = new Nodes();
-////        Nodes node2 = new Nodes();
-////        if (node1.getFrequency() < node2.getFrequency()) {
-////            
-////            return -1;
-////        }
-////         if (node1.getFrequency() > node2.getFrequency()) {
-////            
-////            return 1;
-////        }
-////        return 0;
-//    }
 
 }

@@ -89,7 +89,7 @@ public class HuffmanTree {
             }
             
         } catch (Exception e) {
-
+                System.out.println("An Exception Occured");
         }
         return file;
 
