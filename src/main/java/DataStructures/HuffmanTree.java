@@ -87,10 +87,12 @@ public class HuffmanTree {
                 ObjectOutputStream output = new ObjectOutputStream(fos);
                 output.writeUnshared(n);
             }
+        
             
         } catch (Exception e) {
                 System.out.println("An Exception Occured");
         }
+        System.out.println("Huffman Tree Created");
         return file;
 
     }

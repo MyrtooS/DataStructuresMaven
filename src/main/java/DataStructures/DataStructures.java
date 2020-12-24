@@ -27,11 +27,12 @@ public class DataStructures {
      * @throws java.io.FileNotFoundException
      * @throws java.io.IOException
      */
-    public static void main(String[] args) throws FileNotFoundException, IOException {
+    public static void main(String[] args) throws FileNotFoundException, IOException, ClassNotFoundException {
 
         FileWrapper fileReader = new FileWrapper();
         File file = fileReader.returnFile();
         HuffmanTree.FileToNode(file);
+        
 
     }
 
