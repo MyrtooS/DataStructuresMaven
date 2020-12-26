@@ -5,7 +5,6 @@
  */
 package DataStructures;
  
-import DataStructures.*;
 import java.util.Comparator;
 /**
  *
