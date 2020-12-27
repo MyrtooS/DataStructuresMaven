@@ -31,7 +31,7 @@ public class HuffmanTree {
         this.tree = tree;
     }
 
-    public static void FileToNode(File file) throws FileNotFoundException, IOException {
+    public static File FileToNode(File file) throws FileNotFoundException, IOException {
 
         int AsciiValue;
         int counter = 0;
@@ -51,7 +51,8 @@ public class HuffmanTree {
             counter++;
 
         }
-        MakeHuffmanTree();
+        File file2=MakeHuffmanTree();
+        return file2;
     }
 
     public static File MakeHuffmanTree() {
@@ -80,7 +81,7 @@ public class HuffmanTree {
             for (Nodes n : nodes) {
                 FileOutputStream fos = new FileOutputStream(file);
                 ObjectOutputStream output = new ObjectOutputStream(fos);
-                output.writeUnshared(n);
+                output.writeObject(n);
             }
         
             
