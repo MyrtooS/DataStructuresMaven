@@ -51,7 +51,7 @@ public class HuffmanTree {
             counter++;
 
         }
-        File file2=MakeHuffmanTree();
+        File file2 = MakeHuffmanTree();
         return file2;
     }
 
@@ -75,18 +75,20 @@ public class HuffmanTree {
 
         }
         try {
-            Nodes[] nodes = tree.toArray(new Nodes[tree.size()]);
-            Arrays.sort(nodes, tree.comparator());
+//            Nodes[] nodes = tree.toArray(new Nodes[tree.size()]);
+//            Arrays.sort(nodes, tree.comparator());
 
-            for (Nodes n : nodes) {
-                FileOutputStream fos = new FileOutputStream(file);
-                ObjectOutputStream output = new ObjectOutputStream(fos);
-                output.writeObject(n);
+            for (Nodes n : tree) {
+                FileOutputStream fos = new FileOutputStream("tree.dat");
+                ObjectOutputStream oos = new ObjectOutputStream(fos);
+
+                oos.writeObject(n); //writing nodes to file
+
+                oos.close();
             }
-        
-            
+
         } catch (Exception e) {
-                System.out.println("An Exception Occured");
+            System.out.println("An Exception Occured");
         }
         System.out.println("Huffman Tree Created");
         return file;
