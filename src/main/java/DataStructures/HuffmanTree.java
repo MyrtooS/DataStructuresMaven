@@ -79,16 +79,19 @@ public class HuffmanTree {
 //            Arrays.sort(nodes, tree.comparator());
 
             for (Nodes n : tree) {
-                FileOutputStream fos = new FileOutputStream("tree.dat");
-                ObjectOutputStream oos = new ObjectOutputStream(fos);
+//                FileOutputStream fos = new FileOutputStream("tree.dat");
+//                ObjectOutputStream oos = new ObjectOutputStream(fos);
+//
+//                oos.writeObject(n); //writing nodes to file
+//
+//                oos.close();
 
-                oos.writeObject(n); //writing nodes to file
-
-                oos.close();
+                System.out.println(n.getCharacter() + "" + n.getFrequency() + "\n");
+                System.out.println("WTF");
             }
 
         } catch (Exception e) {
-            System.out.println("An Exception Occured");
+            e.printStackTrace();
         }
         System.out.println("Huffman Tree Created");
         return file;
