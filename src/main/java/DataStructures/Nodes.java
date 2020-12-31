@@ -65,5 +65,10 @@ public class Nodes implements Serializable {
         this.child2 = child2;
     }
 
-
+    @Override
+    public String toString() {
+        return "[[[Frequency:" +
+                frequency + "\n" + "\n" + "Character:" + character + "\n" + "child1:"+child1
+                + "child2:" +child2+ "]]]\n";
+    }
 }

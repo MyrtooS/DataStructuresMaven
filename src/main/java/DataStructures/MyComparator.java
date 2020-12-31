@@ -6,11 +6,12 @@
 package DataStructures;
  
 import java.util.Comparator;
+import java.io.Serializable;
 /**
  *
  * @author myrto
  */
-public class MyComparator implements Comparator<Nodes> {
+public class MyComparator implements Serializable, Comparator<Nodes>  {
 
     @Override
     public int compare(Nodes o1, Nodes o2) {

@@ -6,14 +6,17 @@
 package DataStructures;
 
 import java.io.DataInputStream;
+import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutputStream;
+import java.util.ArrayDeque;
 import java.util.Arrays;
 import java.util.PriorityQueue;
+import java.util.Queue;
 
 /**
  *
@@ -22,14 +25,14 @@ import java.util.PriorityQueue;
 public class HuffmanTree {
 
     public static PriorityQueue<Nodes> tree = new PriorityQueue<Nodes>(128, new MyComparator());
-
-    public PriorityQueue<Nodes> getTree() {
-        return tree;
-    }
-
-    public void setTree(PriorityQueue<Nodes> tree) {
-        this.tree = tree;
-    }
+    //public static ArrayList<Nodes> tree = new ArrayList<Nodes>(128, new MyComparator());
+//    public PriorityQueue<Nodes> getTree() {
+//        return tree;
+//    }
+//
+//    public void setTree(PriorityQueue<Nodes> tree) {
+//        this.tree = tree;
+//    }
 
     public static File FileToNode(File file) throws FileNotFoundException, IOException {
 
@@ -51,50 +54,62 @@ public class HuffmanTree {
             counter++;
 
         }
+        //System.out.println(tree.peek().toString());
         File file2 = MakeHuffmanTree();
         return file2;
     }
 
-    public static File MakeHuffmanTree() {
-        File file = new File("tree.dat");
+    public static File MakeHuffmanTree() throws IOException {
+        File treeFile = new File("tree.dat");
         Nodes root = new Nodes();
         root = null;
+
         while (tree.size() > 1) {
 
-            Nodes firstNode = tree.peek();
-            tree.poll();
-            Nodes secondNode = tree.peek();
-            tree.poll();
+            Nodes firstNode = tree.remove();
+            Nodes secondNode = tree.remove();
             Nodes nNode = new Nodes();
-            int total = firstNode.getFrequency() + secondNode.getFrequency();
-            nNode.setFrequency(total);
-            nNode.setChild1(firstNode);
-            nNode.setChild2(secondNode);
+            nNode.frequency = firstNode.getFrequency() + secondNode.getFrequency();
+            nNode.child1 = firstNode;
+            nNode.child2 = secondNode;
             root = nNode;
             tree.add(root);
 
         }
-        try {
-//            Nodes[] nodes = tree.toArray(new Nodes[tree.size()]);
-//            Arrays.sort(nodes, tree.comparator());
-
-            for (Nodes n : tree) {
-//                FileOutputStream fos = new FileOutputStream("tree.dat");
-//                ObjectOutputStream oos = new ObjectOutputStream(fos);
-//
-//                oos.writeObject(n); //writing nodes to file
-//
-//                oos.close();
-
-                System.out.println(n.getCharacter() + "" + n.getFrequency() + "\n");
-                System.out.println("WTF");
+        ArrayDeque<Integer> ad = new ArrayDeque<>();
+        if (root != null) {
+            if (root.child2 != null) {
+                ad.add(0);
             }
-
-        } catch (Exception e) {
-            e.printStackTrace();
+        } else {
+            int i = 0;
+            for (int elem : ad) {
+                System.out.println("index " + i++ + " " + elem);
+                ad.clear();
+            }
         }
+
+        if (root != null) {
+            if (root.child1 != null) {
+                ad.add(1);
+            }
+        }  else {
+            int i = 0;
+            for (int elem : ad) {
+                System.out.println("index " + i++ + " " + elem);
+                ad.clear();
+            }
+        }
+
+        FileOutputStream fos = new FileOutputStream(treeFile);
+        ObjectOutputStream oos = new ObjectOutputStream(fos);
+
+        oos.writeObject(tree);
+
+        oos.close();
+
         System.out.println("Huffman Tree Created");
-        return file;
+        return treeFile;
 
     }
 
