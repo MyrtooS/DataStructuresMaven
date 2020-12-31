@@ -98,12 +98,12 @@ public class HuffmanTree {
         ArrayDeque<Nodes> ad = new ArrayDeque<>();
         ArrayDeque<Integer> ad2 = new ArrayDeque<>();
         ad.push(root);
-        ad2.push(0);
+//        ad2.push(0);
 
         while (!ad.isEmpty()) {
 
             Nodes n = ad.pop();
-            System.out.printf("%c ", n.character);
+//            System.out.printf("%c ", n.character);
 
             if (n.child1 != null) {
                 ad.push(n.child1);
@@ -113,10 +113,14 @@ public class HuffmanTree {
                 ad.push(n.child2);
                 ad2.push(1);
             }
-            int i = 0;
-            for (int elem : ad2) {
-                System.out.println("index " + elem);
+            if ((n.child1 == null) && (n.child2 == null)) {
+                
+                for (int elem : ad2) {
+                    System.out.println("code =" + elem +"  character ="+n.character);
+                }
+                ad2.clear();
             }
+
         }
 
     }
