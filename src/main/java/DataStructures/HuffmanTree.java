@@ -76,31 +76,7 @@ public class HuffmanTree {
             tree.add(root);
 
         }
-        ArrayDeque<Integer> ad = new ArrayDeque<>();
-        if (root != null) {
-            if (root.child2 != null) {
-                ad.add(0);
-            }
-        } else {
-            int i = 0;
-            for (int elem : ad) {
-                System.out.println("index " + i++ + " " + elem);
-                ad.clear();
-            }
-        }
-
-        if (root != null) {
-            if (root.child1 != null) {
-                ad.add(1);
-            }
-        }  else {
-            int i = 0;
-            for (int elem : ad) {
-                System.out.println("index " + i++ + " " + elem);
-                ad.clear();
-            }
-        }
-
+        preorderIter(root);
         FileOutputStream fos = new FileOutputStream(treeFile);
         ObjectOutputStream oos = new ObjectOutputStream(fos);
 
@@ -110,6 +86,38 @@ public class HuffmanTree {
 
         System.out.println("Huffman Tree Created");
         return treeFile;
+
+    }
+
+    public static void preorderIter(Nodes root) {
+
+        if (root == null) {
+            return;
+        }
+
+        ArrayDeque<Nodes> ad = new ArrayDeque<>();
+        ArrayDeque<Integer> ad2 = new ArrayDeque<>();
+        ad.push(root);
+        ad2.push(0);
+
+        while (!ad.isEmpty()) {
+
+            Nodes n = ad.pop();
+            System.out.printf("%c ", n.character);
+
+            if (n.child1 != null) {
+                ad.push(n.child1);
+                ad2.push(0);
+            }
+            if (n.child2 != null) {
+                ad.push(n.child2);
+                ad2.push(1);
+            }
+            int i = 0;
+            for (int elem : ad2) {
+                System.out.println("index " + elem);
+            }
+        }
 
     }
 

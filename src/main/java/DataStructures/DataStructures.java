@@ -33,7 +33,6 @@ public class DataStructures {
         File file = fileReader.returnFile();
         File file2;
         file2=HuffmanTree.FileToNode(file);
-        
         PrintTreeCode pt = new PrintTreeCode();
         pt.treeCode(file2);
         
