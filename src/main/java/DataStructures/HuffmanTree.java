@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.util.ArrayDeque;
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.PriorityQueue;
 import java.util.Queue;
 
@@ -78,6 +79,7 @@ public class HuffmanTree {
         }
 //        String result = findPath('a',root,"");
 //        System.out.println(result);
+        preorderIter(root);
         FileOutputStream fos = new FileOutputStream(treeFile);
         ObjectOutputStream oos = new ObjectOutputStream(fos);
 
@@ -104,42 +106,38 @@ public class HuffmanTree {
         while (!ad.isEmpty()) {
 
             Nodes n = ad.pop();
-            System.out.printf("%c ", n.character);
 
             if (n.child1 != null) {
-                ad.push(n.child1);
+//                ad.push(n.child1);
                 ad2.push(0);
+                preorderIter(n.child1);
             }
             if (n.child2 != null) {
-                ad.push(n.child2);
+//               ad.push(n.child2);
                 ad2.push(1);
+                preorderIter(n.child2);
             }
             if ((n.child1 == null) && (n.child2 == null)) {
+                Iterator value = ad2.iterator();
 
-                for (int elem : ad2) {
-                    System.out.println("code =" + elem + "  character =" + n.character);
+                // Displaying the values after iterating through the queue 
+                System.out.println("The iterator values are: ");
+                while (value.hasNext()) {
+                    System.out.println("code "+value.next()+" character"+n.character);
                 }
+//                System.out.println(ad2.iterator().toString());
+//                
+//                for (int elem : ad2) {
+////                    System.out.println(ad2.descendingIterator());
+//                   
+//                    System.out.println("code =" + elem  + "  character =" + n.character);
+////                    System.out.println("fsakhgjadsAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+//                }
                 ad2.clear();
             }
-            for (int elem : ad2) {
-                System.out.println("code =" + elem + "  character =" + n.character);
-            }
-            ad2.clear();
 
         }
 
     }
-
-//    private String findPath(char input, HuffmanNode root, String path) {
-//        String result;
-//        if (!root.isLeaf()) {
-//            if ((result = findPath(input, root.left, path + '0')) == null) {
-//                result = findPath(input, root.right, path + '1');
-//            }
-//        } else {
-//            result = (input == root.character) ? path : null;
-//        }
-//        return result;
-//    }
 
 }
