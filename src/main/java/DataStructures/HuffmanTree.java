@@ -26,6 +26,10 @@ import java.util.Queue;
 public class HuffmanTree {
 
     public static PriorityQueue<Nodes> tree = new PriorityQueue<Nodes>(128, new MyComparator());
+    
+    public static ArrayDeque<Nodes> ad = new ArrayDeque<>();
+    public static ArrayDeque<Integer> ad2 = new ArrayDeque<>();
+        
     //public static ArrayList<Nodes> tree = new ArrayList<Nodes>(128, new MyComparator());
 //    public PriorityQueue<Nodes> getTree() {
 //        return tree;
@@ -55,15 +59,16 @@ public class HuffmanTree {
             counter++;
 
         }
-        //System.out.println(tree.peek().toString());
+     
+        
         File file2 = MakeHuffmanTree();
         return file2;
     }
 
     public static File MakeHuffmanTree() throws IOException {
         File treeFile = new File("tree.dat");
-        Nodes root = new Nodes();
-        root = null;
+        Nodes nNodwe = new Nodes();
+        //nNode = null;
 
         while (tree.size() > 1) {
 
@@ -73,71 +78,128 @@ public class HuffmanTree {
             nNode.frequency = firstNode.getFrequency() + secondNode.getFrequency();
             nNode.child1 = firstNode;
             nNode.child2 = secondNode;
-            root = nNode;
-            tree.add(root);
+            tree.add(nNode);
+            
+    
+            //root = nNode;
+            //tree.add(root);
 
         }
+//       Iterator value = tree.iterator();
+//
+//                // Displaying the values after iterating through the queue 
+//                System.out.println("The iterator values are: ");
+//                while (value.hasNext()) {
+//                    System.out.println(value.next().toString());
+//                }
+       //System.out.println(tree.peek().toString());
 //        String result = findPath('a',root,"");
 //        System.out.println(result);
-        preorderIter(root);
-        FileOutputStream fos = new FileOutputStream(treeFile);
-        ObjectOutputStream oos = new ObjectOutputStream(fos);
-
-        oos.writeObject(tree);
-
-        oos.close();
+        //System.out.println(root.toString());
+        
+        ad.push(tree.peek());
+        //ad2.push(0);
+        preorderIter(tree.peek(),"");
+//        FileOutputStream fos = new FileOutputStream(treeFile);
+//        ObjectOutputStream oos = new ObjectOutputStream(fos);
+//
+//        oos.writeObject(tree);
+//
+//        oos.close();
 
         System.out.println("Huffman Tree Created");
         return treeFile;
 
     }
-
-    public static void preorderIter(Nodes root) {
+        
+    public static void preorderIter(Nodes root, String s) {
 
         if (root == null) {
             return;
         }
+        
 
-        ArrayDeque<Nodes> ad = new ArrayDeque<>();
-        ArrayDeque<Integer> ad2 = new ArrayDeque<>();
-        ad.push(root);
-        ad2.push(0);
+        
+      
 
-        while (!ad.isEmpty()) {
+        //while (ad.isEmpty()) {
 
-            Nodes n = ad.pop();
+           
 
-            if (n.child1 != null) {
-//                ad.push(n.child1);
-                ad2.push(0);
-                preorderIter(n.child1);
-            }
-            if (n.child2 != null) {
-//               ad.push(n.child2);
-                ad2.push(1);
-                preorderIter(n.child2);
-            }
-            if ((n.child1 == null) && (n.child2 == null)) {
-                Iterator value = ad2.iterator();
+         
+            if (root.child1 == null && root.child2 == null &&  Character.isLetterOrDigit(root.character)) {
+                 System.out.println(root.character + ":" + s);
+                        Iterator value = ad2.iterator();
 
                 // Displaying the values after iterating through the queue 
                 System.out.println("The iterator values are: ");
                 while (value.hasNext()) {
-                    System.out.println("code "+value.next()+" character"+n.character);
+                    System.out.println(value.next().toString());
                 }
-//                System.out.println(ad2.iterator().toString());
-//                
-//                for (int elem : ad2) {
-////                    System.out.println(ad2.descendingIterator());
-//                   
-//                    System.out.println("code =" + elem  + "  character =" + n.character);
-////                    System.out.println("fsakhgjadsAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
-//                }
-                ad2.clear();
-            }
-
+                 
+                 return;
+                }
+            ad2.clear();
+            preorderIter(root.child2, ""+0); 
+            ad2.add(0);
+            preorderIter(root.child1,""+1);
+            ad2.add(1);
+            
+           
+               
+               
         }
-
-    }
-
+    
+    
+    
+    
 }
+
+//public static void preorderIter(Nodes root) {
+//
+//        if (root == null) {
+//            return;
+//        }
+//
+//        ArrayDeque<Nodes> ad = new ArrayDeque<>();
+//        ArrayDeque<Integer> ad2 = new ArrayDeque<>();
+//        ad.push(root);
+//        ad2.push(0);
+//
+//        while (!ad.isEmpty()) {
+//
+//            Nodes n = ad.pop();
+//
+//            if (n.child1 != null) {
+////                ad.push(n.child1);
+//                ad2.push(0);
+//                preorderIter(n.child1);
+//            }
+//            if (n.child2 != null) {
+////               ad.push(n.child2);
+//                ad2.push(1);
+//                preorderIter(n.child2);
+//            }
+//            if ((n.child1 == null) && (n.child2 == null)) {
+//                Iterator value = ad2.iterator();
+//
+//                // Displaying the values after iterating through the queue 
+//                System.out.println("The iterator values are: ");
+//                while (value.hasNext()) {
+//                    System.out.println("code "+value.next()+" character"+n.character);
+//                }
+////                System.out.println(ad2.iterator().toString());
+////                
+////                for (int elem : ad2) {
+//////                    System.out.println(ad2.descendingIterator());
+////                   
+////                    System.out.println("code =" + elem  + "  character =" + n.character);
+//////                    System.out.println("fsakhgjadsAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
+////                }
+//                ad2.clear();
+
+        
+
+    
+
+

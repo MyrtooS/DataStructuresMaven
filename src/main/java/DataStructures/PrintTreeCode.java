@@ -28,10 +28,10 @@ public class PrintTreeCode {
         ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(HuffmanFile));
 
         Object obj = inputStream.readObject();
-        System.out.println(obj);
+        //System.out.println(obj);
         try {
 
-            //System.out.println(obj);
+            System.out.println(obj);
 
         } catch (Exception e) {
             System.out.println("\n" + "End of file reached");
