@@ -26,10 +26,10 @@ import java.util.Queue;
 public class HuffmanTree {
 
     public static PriorityQueue<Nodes> tree = new PriorityQueue<Nodes>(128, new MyComparator());
-    
+
     public static ArrayDeque<Nodes> ad = new ArrayDeque<>();
     public static ArrayDeque<Integer> ad2 = new ArrayDeque<>();
-        
+
     //public static ArrayList<Nodes> tree = new ArrayList<Nodes>(128, new MyComparator());
 //    public PriorityQueue<Nodes> getTree() {
 //        return tree;
@@ -38,7 +38,6 @@ public class HuffmanTree {
 //    public void setTree(PriorityQueue<Nodes> tree) {
 //        this.tree = tree;
 //    }
-
     public static File FileToNode(File file) throws FileNotFoundException, IOException {
 
         int AsciiValue;
@@ -59,16 +58,15 @@ public class HuffmanTree {
             counter++;
 
         }
-     
-        
+
         File file2 = MakeHuffmanTree();
         return file2;
     }
 
     public static File MakeHuffmanTree() throws IOException {
         File treeFile = new File("tree.dat");
-        Nodes nNodwe = new Nodes();
-        //nNode = null;
+        Nodes root = null;
+
 
         while (tree.size() > 1) {
 
@@ -76,14 +74,13 @@ public class HuffmanTree {
             Nodes secondNode = tree.remove();
             Nodes nNode = new Nodes();
             nNode.frequency = firstNode.getFrequency() + secondNode.getFrequency();
-            nNode.child1 = firstNode;
-            nNode.child2 = secondNode;
-            tree.add(nNode);
-            
-    
-            //root = nNode;
-            //tree.add(root);
+            nNode.character='-';
+            nNode.child2 = firstNode;
+            nNode.child1 = secondNode;
+            //tree.add(nNode);
 
+            root = nNode;
+            tree.add(root);
         }
 //       Iterator value = tree.iterator();
 //
@@ -92,67 +89,54 @@ public class HuffmanTree {
 //                while (value.hasNext()) {
 //                    System.out.println(value.next().toString());
 //                }
-       //System.out.println(tree.peek().toString());
+        //System.out.println(tree.peek().toString());
 //        String result = findPath('a',root,"");
 //        System.out.println(result);
         //System.out.println(root.toString());
-        
-        ad.push(tree.peek());
-        //ad2.push(0);
-        preorderIter(tree.peek(),"");
+
+      
 //        FileOutputStream fos = new FileOutputStream(treeFile);
 //        ObjectOutputStream oos = new ObjectOutputStream(fos);
 //
 //        oos.writeObject(tree);
 //
 //        oos.close();
-
+        //ad.push(root);
+        //ad2.push(0);
+        preorderIter(root, "");
         System.out.println("Huffman Tree Created");
         return treeFile;
 
     }
-        
+
     public static void preorderIter(Nodes root, String s) {
 
         if (root == null) {
             return;
         }
-        
-
-        
-      
 
         //while (ad.isEmpty()) {
-
-           
-
-         
-            if (root.child1 == null && root.child2 == null &&  Character.isLetterOrDigit(root.character)) {
-                 System.out.println(root.character + ":" + s);
-                        Iterator value = ad2.iterator();
-
-                // Displaying the values after iterating through the queue 
-                System.out.println("The iterator values are: ");
-                while (value.hasNext()) {
-                    System.out.println(value.next().toString());
-                }
-                 
-                 return;
-                }
-            ad2.clear();
-            preorderIter(root.child2, ""+0); 
-            ad2.add(0);
-            preorderIter(root.child1,""+1);
-            ad2.add(1);
-            
-           
-               
-               
+        if (root.child1 == null && root.child2 == null && Character.isLetterOrDigit(root.character)) {
+//            System.out.println(root.character + ":" + s);
+//            Iterator value = ad2.iterator();
+//
+//            // Displaying the values after iterating through the queue 
+//            System.out.println("The iterator values are: ");
+//            while (value.hasNext()) {
+//                System.out.println(value.next().toString());
+//            }
+            System.out.println(root.character + ":" + s);
+            return;
         }
-    
-    
-    
-    
+
+        //ad2.clear();
+        preorderIter(root.child2, s + "0");
+        //ad2.add(0);
+        preorderIter(root.child1, s + "1");
+        //ad2.add(1);
+
+    }
+
 }
 
 //public static void preorderIter(Nodes root) {
@@ -197,9 +181,4 @@ public class HuffmanTree {
 //////                    System.out.println("fsakhgjadsAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
 ////                }
 //                ad2.clear();
-
-        
-
-    
-
 
