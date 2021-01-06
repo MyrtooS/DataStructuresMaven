@@ -34,7 +34,9 @@ public class DataStructures {
         File file2;
         file2=HuffmanTree.FileToNode(file);
         PrintTreeCode pt = new PrintTreeCode();
-        pt.treeCode(file2);
+        File file1=pt.treeCode(file2);
+        
+        
         
 
     }

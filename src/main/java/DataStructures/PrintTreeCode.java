@@ -48,10 +48,10 @@ public class PrintTreeCode {
 
         if (root.child1 == null && root.child2 == null) {
 
-            DataOutputStream output = new DataOutputStream(new FileOutputStream(codeFile));
+            DataOutputStream output = new DataOutputStream(new FileOutputStream(codeFile, true));
 //            System.out.println("The iterator values " + root.character + " are: " + "\n");
            System.out.println( root.character + ":" + s + "\n");
-
+           output.writeBytes(root.character + ": " + s + "\n"); 
 //            for (int i = 0; i < ad2.size(); i++) {
 //                System.out.print(ad2.toArray()[i]);
 //
