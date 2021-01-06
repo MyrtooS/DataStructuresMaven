@@ -17,6 +17,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.PriorityQueue;
 
 /**
@@ -26,11 +27,14 @@ import java.util.PriorityQueue;
 public class PrintTreeCode {
 
     public static PriorityQueue<Nodes> tree = new PriorityQueue<Nodes>(128, new MyComparator());
-
+    public static HashMap<Character, String> huffcodes = new HashMap<Character, String>();
     public static File codeFile = new File("code.dat");
 
     public static File treeCode(File HuffmanFile) throws FileNotFoundException, IOException, ClassNotFoundException {
-        File codeFile = new File("code.dat");
+
+        if (codeFile.length() != 0) {
+            codeFile.delete();
+        }
         ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(HuffmanFile));
 
         Object obj = inputStream.readObject();
@@ -38,8 +42,11 @@ public class PrintTreeCode {
         Nodes root = tree.peek();
         System.out.println(tree);
 
-        ArrayDeque<String> ad2 = new ArrayDeque<>();
         preorderIter(root, "");
+
+        for (HashMap.Entry<Character, String> entry : huffcodes.entrySet()) {
+            System.out.println(entry.getKey() + " => " + entry.getValue());
+        }
         return codeFile;
 
     }
@@ -49,29 +56,16 @@ public class PrintTreeCode {
         if (root.child1 == null && root.child2 == null) {
 
             DataOutputStream output = new DataOutputStream(new FileOutputStream(codeFile, true));
-//            System.out.println("The iterator values " + root.character + " are: " + "\n");
-           System.out.println( root.character + ":" + s + "\n");
-           output.writeBytes(root.character + ": " + s + "\n"); 
-//            for (int i = 0; i < ad2.size(); i++) {
-//                System.out.print(ad2.toArray()[i]);
-//
-//            }
+
+            System.out.println(root.character + ":" + s + "\n");
+            output.writeBytes(root.character + ": " + s + "\n");
+            huffcodes.put(root.character, s);
 
             return;
         }
-        
-        preorderIter(root.child2, s+"0");
-        preorderIter(root.child1, s+"1");
-//        if (root.child2 != null) {
-//            ad2.add("0");
-//            preorderIter(root.child2, ad2);
-//        }
-//        if (root.child1 != null) {
-//
-//            ad2.add("1");
-//            preorderIter(root.child1, ad2);
-//        }
-//        ad2.clear();
+
+        preorderIter(root.child2, s + "0");
+        preorderIter(root.child1, s + "1");
 
     }
 
