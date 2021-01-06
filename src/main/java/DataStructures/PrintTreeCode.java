@@ -39,37 +39,39 @@ public class PrintTreeCode {
         System.out.println(tree);
 
         ArrayDeque<String> ad2 = new ArrayDeque<>();
-        preorderIter(root, ad2);
+        preorderIter(root, "");
         return codeFile;
 
     }
 
-    public static void preorderIter(Nodes root, ArrayDeque s) throws FileNotFoundException, IOException {
+    public static void preorderIter(Nodes root, String s) throws FileNotFoundException, IOException {
 
         if (root.child1 == null && root.child2 == null) {
 
             DataOutputStream output = new DataOutputStream(new FileOutputStream(codeFile));
-            System.out.println("The iterator values " + root.character + " are: " + "\n");
-           // System.out.println("The iterator values " + root.character + " are: " + s + "\n");
+//            System.out.println("The iterator values " + root.character + " are: " + "\n");
+           System.out.println( root.character + ":" + s + "\n");
 
-            for (int i = 0; i < ad2.size(); i++) {
-                System.out.print(ad2.toArray()[i]);
-
-            }
+//            for (int i = 0; i < ad2.size(); i++) {
+//                System.out.print(ad2.toArray()[i]);
+//
+//            }
 
             return;
         }
-
-        if (root.child2 != null) {
-            ad2.add("0");
-            preorderIter(root.child2, ad2);
-        }
-        if (root.child1 != null) {
-
-            ad2.add("1");
-            preorderIter(root.child1, ad2);
-        }
-        ad2.clear();
+        
+        preorderIter(root.child2, s+"0");
+        preorderIter(root.child1, s+"1");
+//        if (root.child2 != null) {
+//            ad2.add("0");
+//            preorderIter(root.child2, ad2);
+//        }
+//        if (root.child1 != null) {
+//
+//            ad2.add("1");
+//            preorderIter(root.child1, ad2);
+//        }
+//        ad2.clear();
 
     }
 
