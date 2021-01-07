@@ -17,6 +17,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.BitSet;
 import java.util.HashMap;
 import java.util.PriorityQueue;
 
@@ -29,6 +30,7 @@ public class PrintTreeCode {
     public static PriorityQueue<Nodes> tree = new PriorityQueue<Nodes>(128, new MyComparator());
     public static HashMap<Character, String> huffcodes = new HashMap<Character, String>();
     public static File codeFile = new File("code.dat");
+    public static BitSet bitSet = new BitSet();
 
     public static File treeCode(File HuffmanFile) throws FileNotFoundException, IOException, ClassNotFoundException {
 
@@ -57,14 +59,27 @@ public class PrintTreeCode {
 
             DataOutputStream output = new DataOutputStream(new FileOutputStream(codeFile, true));
 
-            System.out.println(root.character + ":" + s + "\n");
-            output.writeBytes(root.character + ": " + s + "\n");
-            huffcodes.put(root.character, s);
+           // System.out.println(root.character + ":" + s + "\n");
+            
+            
+           
+           
 
+            BitSet bitset = new BitSet(s.length());
+            for (int i = 0; i < s.length(); i++) {
+                if (s.charAt(i) == '1') {
+                    bitset.set(i);
+                }
+            }
+           System.out.println(bitset);
+           output.writeBytes(root.character + ": " + bitset + "\n");
+
+            //huffcodes.put(root.character, );
             return;
         }
 
         preorderIter(root.child2, s + "0");
+
         preorderIter(root.child1, s + "1");
 
     }
