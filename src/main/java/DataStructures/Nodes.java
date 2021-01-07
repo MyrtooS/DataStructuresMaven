@@ -17,6 +17,7 @@ public class Nodes implements Serializable {
     char character;
     Nodes child1;
     Nodes child2;
+   
 
     public Nodes(int frequency, char character) {
         this.frequency = frequency;
@@ -65,6 +66,9 @@ public class Nodes implements Serializable {
         this.child2 = child2;
     }
 
+   
+
+    
     @Override
     public String toString() {
         return "[[[Frequency:" +
