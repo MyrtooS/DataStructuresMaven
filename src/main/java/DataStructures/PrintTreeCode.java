@@ -15,6 +15,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.BitSet;
@@ -28,7 +29,7 @@ import java.util.PriorityQueue;
 public class PrintTreeCode {
 
     public static PriorityQueue<Nodes> tree = new PriorityQueue<Nodes>(128, new MyComparator());
-    public static HashMap<Character, String> huffcodes = new HashMap<Character, String>();
+    public static HashMap<Character, BitSet> huffcodes = new HashMap<Character, BitSet>();
     public static File codeFile = new File("code.dat");
     public static BitSet bitSet = new BitSet();
 
@@ -46,7 +47,7 @@ public class PrintTreeCode {
 
         preorderIter(root, "");
 
-        for (HashMap.Entry<Character, String> entry : huffcodes.entrySet()) {
+        for (HashMap.Entry<Character, BitSet> entry : huffcodes.entrySet()) {
             System.out.println(entry.getKey() + " => " + entry.getValue());
         }
         return codeFile;
@@ -57,13 +58,9 @@ public class PrintTreeCode {
 
         if (root.child1 == null && root.child2 == null) {
 
-            DataOutputStream output = new DataOutputStream(new FileOutputStream(codeFile, true));
-
+            FileOutputStream fos = new FileOutputStream(codeFile);
+            ObjectOutputStream oos = new ObjectOutputStream(fos);
            // System.out.println(root.character + ":" + s + "\n");
-            
-            
-           
-           
 
             BitSet bitset = new BitSet(s.length());
             for (int i = 0; i < s.length(); i++) {
@@ -71,10 +68,10 @@ public class PrintTreeCode {
                     bitset.set(i);
                 }
             }
-           System.out.println(bitset);
-           output.writeBytes(root.character + ": " + bitset + "\n");
+            System.out.println(bitset);
+            huffcodes.put(root.character, bitset);
+            oos.writeObject(huffcodes);
 
-            //huffcodes.put(root.character, );
             return;
         }
 
