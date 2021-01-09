@@ -15,15 +15,6 @@ public class MyComparator implements Serializable, Comparator<Nodes>  {
 
     @Override
     public int compare(Nodes o1, Nodes o2) {
-//        if(o1.getFrequency() < o2.getFrequency()) {
-//				return -1;
-//			}
-//			else if(o1.getFrequency() > o2.getFrequency()) {
-//				return 1;
-//			}
-//			else {
-//				return 0;
-//			}
         return o1.frequency - o2.frequency; 
 
    // }

@@ -21,18 +21,7 @@ import java.util.PriorityQueue;
  */
 public class HuffmanTree {
 
-    public static PriorityQueue<Nodes> tree = new PriorityQueue<Nodes>(128, new MyComparator());
-
-    public static ArrayDeque<Nodes> ad = new ArrayDeque<>();
-    public static ArrayDeque<String> ad2 = new ArrayDeque<>();
-
-    public PriorityQueue<Nodes> getTree() {
-        return tree;
-    }
-
-    public void setTree(PriorityQueue<Nodes> tree) {
-        this.tree = tree;
-    }
+    private static PriorityQueue<Nodes> tree = new PriorityQueue<Nodes>(128, new MyComparator());
 
     public static File FileToNode(File file) throws FileNotFoundException, IOException {
 
@@ -55,8 +44,8 @@ public class HuffmanTree {
 
         }
 
-        File file2 = MakeHuffmanTree();
-        return file2;
+        File tree = MakeHuffmanTree();
+        return tree;
     }
 
     public static File MakeHuffmanTree() throws IOException {
@@ -72,7 +61,7 @@ public class HuffmanTree {
             nNode.character = '-';
             nNode.child2 = firstNode;
             nNode.child1 = secondNode;
-            //tree.add(nNode);
+            
 
             root = nNode;
             tree.add(root);
@@ -80,13 +69,9 @@ public class HuffmanTree {
 
         FileOutputStream fos = new FileOutputStream(treeFile);
         ObjectOutputStream oos = new ObjectOutputStream(fos);
-
         oos.writeObject(tree);
-
         oos.close();
-       
-       
-        //System.out.println("Huffman Tree Created");
+      
         return treeFile;
 
     }

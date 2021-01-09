@@ -29,22 +29,24 @@ public class DataStructures {
      */
     public static void main(String[] args) throws FileNotFoundException, IOException, ClassNotFoundException {
 
-        FileWrapper fileReader = new FileWrapper();
-        File file = fileReader.returnFile();
-        File file2;
-        file2 = HuffmanTree.FileToNode(file);
-        PrintTreeCode pt = new PrintTreeCode();
-        File file1 = pt.treeCode(file2);
-//        for (String s : args) {
-//            File normalFile = new File(args[0]);
-//            File huffmanCodeFile = new File(args[1]);
-//        }
-        Encoder encoder = new Encoder();
-        
-        File testing = new File("/home/myrto/NetBeansProjects/DataStructuresMaven/testing.dat");
-
-        encoder.Encode(testing, file1);
-
+       File threebooks=new File("/home/anna/NetBeansProjects/DataStructuresMaven/threebooks.dat");
+       
+       FileWrapper fileWrapper=new FileWrapper();
+       File frequencies=fileWrapper.CountCharactersFile(threebooks);
+       
+       HuffmanTree huffmanTree = new HuffmanTree();
+       File tree=huffmanTree.FileToNode(frequencies);
+       
+       PrintTreeCode printTreeCode= new PrintTreeCode();
+       File code=printTreeCode.treeCode(tree);
+       
+       Encoder encoder = new Encoder();
+       encoder.Encode(threebooks,code);
+////        for (String s : args) {
+////            File normalFile = new File(args[0]);
+////            File huffmanCodeFile = new File(args[1]);
+////        }
+       
     }
 
 }

@@ -5,10 +5,6 @@
  */
 package DataStructures;
 
-import static DataStructures.HuffmanTree.ad2;
-import java.io.BufferedReader;
-import java.io.DataOutputStream;
-import java.io.EOFException;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -16,8 +12,6 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.util.ArrayDeque;
-import java.util.ArrayList;
 import java.util.BitSet;
 import java.util.HashMap;
 import java.util.PriorityQueue;
@@ -28,23 +22,23 @@ import java.util.PriorityQueue;
  */
 public class PrintTreeCode {
 
-    public static PriorityQueue<Nodes> tree = new PriorityQueue<Nodes>(128, new MyComparator());
-    public static HashMap<Character, BitSet> huffcodes = new HashMap<Character, BitSet>();
-    public static File codeFile = new File("code.dat");
-    public static BitSet bitSet = new BitSet();
+    private static PriorityQueue<Nodes> tree = new PriorityQueue<Nodes>(128, new MyComparator());
+    private static HashMap<Character, BitSet> huffcodes = new HashMap<Character, BitSet>();
+    private static File codeFile = new File("code.dat");
+    private static BitSet bitSet = new BitSet();
 
     public static File treeCode(File HuffmanFile) throws FileNotFoundException, IOException, ClassNotFoundException {
 
         if (codeFile.length() != 0) {
             codeFile.delete();
         }
+        
         ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(HuffmanFile));
-
         Object obj = inputStream.readObject();
+        
         tree = (PriorityQueue) obj;
         Nodes root = tree.peek();
-        System.out.println(tree);
-
+       
         preorderIter(root, "");
 
         for (HashMap.Entry<Character, BitSet> entry : huffcodes.entrySet()) {
@@ -60,7 +54,6 @@ public class PrintTreeCode {
 
             FileOutputStream fos = new FileOutputStream(codeFile);
             ObjectOutputStream oos = new ObjectOutputStream(fos);
-           // System.out.println(root.character + ":" + s + "\n");
 
             BitSet bitset = new BitSet(s.length());
             for (int i = 0; i < s.length(); i++) {
@@ -80,7 +73,5 @@ public class PrintTreeCode {
         preorderIter(root.child1, s + "1");
 
     }
-    
-    
 
 }

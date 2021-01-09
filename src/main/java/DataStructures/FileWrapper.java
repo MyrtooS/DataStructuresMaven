@@ -29,95 +29,42 @@ public class FileWrapper {
 
     }
 
-    public static File returnFile() throws IOException {
-        readUrl();
-        File file = writeFile();
-        return file;
-    }
-
-    public static void readUrl() throws MalformedURLException, IOException {
-        try {
-            URL pride = new URL("https://www.gutenberg.org/files/1342/1342-0.txt");
-            CountCharacters(pride);
-        } catch (Exception e) {
-
-        }
-        try {
-            URL alice = new URL("https://www.gutenberg.org/files/11/11-0.txt");
-            CountCharacters(alice);
-        } catch (Exception e) {
-        }
-        try {
-            URL moby = new URL("https://www.gutenberg.org/files/2701/2701-0.txt");
-            CountCharacters(moby);
-        } catch (Exception e) {
-
-        }
-
-    }
-
     public static File writeFile() throws FileNotFoundException, IOException {
 
         File file = new File("frequencies.dat");
         DataOutputStream output = new DataOutputStream(new FileOutputStream(file));
         for (int k = 0; k < 128; k++) { // adds data from array to file frequencies.dat
             output.writeBytes(counter[k] + "\n");
-            //output.writeBytes(k + ": " + counter[k] + "\n"); 
+          
         }
 
-//        BufferedReader br = new BufferedReader(new java.io.FileReader("frequencies.dat"));
-//        String line1;
-//        while ((line1 = br.readLine()) != null) { //prints results
-//            System.out.println(line1);
-//        }
         return file;
 
     }
-
-    public static void CountCharacters(URL book) throws IOException {
-
-        BufferedReader in = new BufferedReader(new InputStreamReader(book.openStream()));
-        String line;
-        while ((line = in.readLine()) != null) {
-            //System.out.println(line);
-            for (int i = 0; i < line.length(); i++) {
-                char c = line.charAt(i);  // for every sentense get each character
-                int AsciiValue = (int) c;  //typecast character to integer resulting in Ascii character
-                //System.out.println(AsciiValue);
-                for (int z = 0; z < 128; z++) {
-                    if (AsciiValue == z) {
-                        counter[AsciiValue]++;
-                    }
-                }
-
-            }
-
-        }
-        in.close();
-    }
-     public static File CountCharactersFile(File book) throws IOException {
-         
-        BufferedReader br =  new BufferedReader(new FileReader(book));
-//        Scanner myReader = new Scanner(book);
-        String line;
-        
-        while ((line = br.readLine()) != null) {
-            //System.out.println(line);
-            for (int i = 0; i < line.length(); i++) {
-                char c = line.charAt(i);  // for every sentense get each character
-                int AsciiValue = (int) c;  //typecast character to integer resulting in Ascii character
-                //System.out.println(AsciiValue);
-                for (int z = 0; z < 128; z++) {
-                    if (AsciiValue == z) {
-                        counter[AsciiValue]++;
-                    }
-                }
-
-            }
-
-        }
-       File file1=writeFile();
-       return file1;
-    }
     
+    public static File CountCharactersFile(File book) throws IOException {
+
+        BufferedReader br = new BufferedReader(new FileReader(book));
+
+        String line;
+
+        while ((line = br.readLine()) != null) {
+            
+            for (int i = 0; i < line.length(); i++) {
+                char c = line.charAt(i);  // for every sentense get each character
+                int AsciiValue = (int) c;  //typecast character to integer resulting in Ascii character
+                
+                for (int z = 0; z < 128; z++) {
+                    if (AsciiValue == z) {
+                        counter[AsciiValue]++;
+                    }
+                }
+
+            }
+
+        }
+        File file1 = writeFile();
+        return file1;
+    }
+
 }
