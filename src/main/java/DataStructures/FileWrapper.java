@@ -14,6 +14,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.Scanner;
 
 /**
  *
@@ -92,6 +93,29 @@ public class FileWrapper {
 
         }
         in.close();
+    }
+     public static File CountCharactersFile(File book) throws IOException {
+
+        Scanner myReader = new Scanner(book);
+        String line;
+        
+        while ((line = myReader.nextLine()) != null) {
+            //System.out.println(line);
+            for (int i = 0; i < line.length(); i++) {
+                char c = line.charAt(i);  // for every sentense get each character
+                int AsciiValue = (int) c;  //typecast character to integer resulting in Ascii character
+                //System.out.println(AsciiValue);
+                for (int z = 0; z < 128; z++) {
+                    if (AsciiValue == z) {
+                        counter[AsciiValue]++;
+                    }
+                }
+
+            }
+
+        }
+       File file1=writeFile();
+       return file1;
     }
     
 }
