@@ -13,6 +13,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.ObjectInputStream;
@@ -36,19 +37,29 @@ public class Encoder {
         Object obj = inputStream.readObject();
         huffcodes = (HashMap) obj;
 
-        Scanner myReader = new Scanner(asciiFile);
+//        Scanner myReader = new Scanner(asciiFile);
+        BufferedReader br = new BufferedReader(new FileReader(asciiFile));
         String line;
-        while ((line = myReader.nextLine()) != null) {
+        while ((line = br.readLine()) != null) {
             System.out.println(line);
+            System.out.println("got this far");
             for (int i = 0; i < line.length(); i++) {
 
                 char c = line.charAt(i);
-                System.out.println(huffcodes.get(c));
-                DataOutputStream output = new DataOutputStream(new FileOutputStream(codes));
-                output.write(huffcodes.get(c).toByteArray());
-                
+//                byte[] bytes = new byte[(huffcodes.size() + 7) / 8];
                 
 
+//                byte cs = (byte) huffcodes.get(c);
+                System.out.println(huffcodes.get(c));
+//                System.out.println(huffcodes.toString());
+
+//                StringBuilder s = new StringBuilder();
+//                for (int y = 0; y < huffcodes.size(); y++) {
+//                    s.append(huffcodes.get(y) == true ? 1 : 0);
+//                }
+
+//                DataOutputStream output = new DataOutputStream(new FileOutputStream(codes));
+//                output.write(huffcodes.get(c).toByteArray());
             }
 
         }

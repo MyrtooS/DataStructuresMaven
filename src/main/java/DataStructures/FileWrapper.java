@@ -10,6 +10,7 @@ import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.MalformedURLException;
@@ -95,11 +96,12 @@ public class FileWrapper {
         in.close();
     }
      public static File CountCharactersFile(File book) throws IOException {
-
-        Scanner myReader = new Scanner(book);
+         
+        BufferedReader br =  new BufferedReader(new FileReader(book));
+//        Scanner myReader = new Scanner(book);
         String line;
         
-        while ((line = myReader.nextLine()) != null) {
+        while ((line = br.readLine()) != null) {
             //System.out.println(line);
             for (int i = 0; i < line.length(); i++) {
                 char c = line.charAt(i);  // for every sentense get each character
