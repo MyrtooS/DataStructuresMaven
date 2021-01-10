@@ -19,7 +19,7 @@ import java.util.Scanner;
 
 /**
  *
- * @author anna
+ * @author it21771-it21794
  */
 public class FileWrapper {
 
@@ -35,13 +35,13 @@ public class FileWrapper {
         DataOutputStream output = new DataOutputStream(new FileOutputStream(file));
         for (int k = 0; k < 128; k++) { // adds data from array to file frequencies.dat
             output.writeBytes(counter[k] + "\n");
-          
+
         }
 
         return file;
 
     }
-    
+
     public static File CountCharactersFile(File book) throws IOException {
 
         BufferedReader br = new BufferedReader(new FileReader(book));
@@ -49,11 +49,11 @@ public class FileWrapper {
         String line;
 
         while ((line = br.readLine()) != null) {
-            
+
             for (int i = 0; i < line.length(); i++) {
                 char c = line.charAt(i);  // for every sentense get each character
                 int AsciiValue = (int) c;  //typecast character to integer resulting in Ascii character
-                
+
                 for (int z = 0; z < 128; z++) {
                     if (AsciiValue == z) {
                         counter[AsciiValue]++;
@@ -63,6 +63,7 @@ public class FileWrapper {
             }
 
         }
+
         File file1 = writeFile();
         return file1;
     }

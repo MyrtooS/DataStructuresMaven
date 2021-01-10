@@ -17,7 +17,7 @@ import java.util.PriorityQueue;
 
 /**
  *
- * @author myrto
+ * @author it21771-it21794
  */
 public class HuffmanTree {
 
@@ -61,7 +61,6 @@ public class HuffmanTree {
             nNode.character = '-';
             nNode.child2 = firstNode;
             nNode.child1 = secondNode;
-            
 
             root = nNode;
             tree.add(root);
@@ -71,11 +70,9 @@ public class HuffmanTree {
         ObjectOutputStream oos = new ObjectOutputStream(fos);
         oos.writeObject(tree);
         oos.close();
-      
+
         return treeFile;
 
     }
-
-   
 
 }

@@ -29,24 +29,22 @@ public class DataStructures {
      */
     public static void main(String[] args) throws FileNotFoundException, IOException, ClassNotFoundException {
 
-       File threebooks=new File("/home/anna/NetBeansProjects/DataStructuresMaven/threebooks.dat");
-       
-       FileWrapper fileWrapper=new FileWrapper();
-       File frequencies=fileWrapper.CountCharactersFile(threebooks);
-       
-       HuffmanTree huffmanTree = new HuffmanTree();
-       File tree=huffmanTree.FileToNode(frequencies);
-       
-       PrintTreeCode printTreeCode= new PrintTreeCode();
-       File code=printTreeCode.treeCode(tree);
-       
-       Encoder encoder = new Encoder();
-       encoder.Encode(threebooks,code);
-////        for (String s : args) {
-////            File normalFile = new File(args[0]);
-////            File huffmanCodeFile = new File(args[1]);
-////        }
-       
+        for (String s : args) {
+            File asciiFile = new File(args[0]);
+            File outputFile = new File(args[1]);
+            FileWrapper fileWrapper = new FileWrapper();
+            File frequencies = fileWrapper.CountCharactersFile(asciiFile);
+
+            HuffmanTree huffmanTree = new HuffmanTree();
+            File tree = huffmanTree.FileToNode(frequencies);
+
+            PrintTreeCode printTreeCode = new PrintTreeCode();
+            File code = printTreeCode.treeCode(tree);
+
+            Encoder encoder = new Encoder();
+            encoder.Encode(asciiFile, code, outputFile);
+        }
+
     }
 
 }

@@ -41,9 +41,6 @@ public class PrintTreeCode {
        
         preorderIter(root, "");
 
-        for (HashMap.Entry<Character, BitSet> entry : huffcodes.entrySet()) {
-            System.out.println(entry.getKey() + " => " + entry.getValue());
-        }
         return codeFile;
 
     }
@@ -61,7 +58,7 @@ public class PrintTreeCode {
                     bitset.set(i);
                 }
             }
-            System.out.println(bitset);
+           
             huffcodes.put(root.character, bitset);
             oos.writeObject(huffcodes);
 
