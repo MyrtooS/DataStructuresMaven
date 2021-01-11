@@ -26,19 +26,20 @@ public class PrintTreeCode {
     private static HashMap<Character, BitSet> huffcodes = new HashMap<Character, BitSet>();
     private static File codeFile = new File("code.dat");
     private static BitSet bitSet = new BitSet();
+    private static HashMap<Character, String> huffcodes2 = new HashMap<Character, String>();
 
     public static File treeCode(File HuffmanFile) throws FileNotFoundException, IOException, ClassNotFoundException {
 
         if (codeFile.length() != 0) {
             codeFile.delete();
         }
-        
+
         ObjectInputStream inputStream = new ObjectInputStream(new FileInputStream(HuffmanFile));
         Object obj = inputStream.readObject();
-        
+
         tree = (PriorityQueue) obj;
         Nodes root = tree.peek();
-       
+
         preorderIter(root, "");
 
         return codeFile;
@@ -57,18 +58,18 @@ public class PrintTreeCode {
                 if (s.charAt(i) == '1') {
                     bitset.set(i);
                 }
-            }
-           
-            huffcodes.put(root.character, bitset);
-            oos.writeObject(huffcodes);
 
-            return;
+                huffcodes.put(root.character, bitset);
+                oos.writeObject(huffcodes);
+
+                return;
+            }
+
+            preorderIter(root.child2, s + "0");
+
+            preorderIter(root.child1, s + "1");
+
         }
 
-        preorderIter(root.child2, s + "0");
-
-        preorderIter(root.child1, s + "1");
-
     }
-
 }

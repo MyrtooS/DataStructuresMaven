@@ -9,7 +9,7 @@ import java.io.Serializable;
 
 /**
  *
- * @author myrto
+ * @author 21771-21794
  */
 public class Nodes implements Serializable {
 

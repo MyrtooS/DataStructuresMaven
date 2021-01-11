@@ -18,7 +18,7 @@ import DataStructures.*;
 
 /**
  *
- * @author it21771 it21794
+ * @author 21771 21794
  */
 public class DataStructures {
 

@@ -9,7 +9,7 @@ import java.util.Comparator;
 import java.io.Serializable;
 /**
  *
- * @author myrto
+ * @author 21771-21794
  */
 public class MyComparator implements Serializable, Comparator<Nodes>  {
 

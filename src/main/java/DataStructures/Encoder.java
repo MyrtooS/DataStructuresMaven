@@ -19,7 +19,7 @@ import java.util.HashMap;
 
 /**
  *
- * @author it21771-it21794
+ * @author 21771-21794
  */
 public class Encoder {
 
@@ -45,13 +45,16 @@ public class Encoder {
                 char c = line.charAt(i);
 
                 BitSet bitset = (huffcodes.get(c));
+
+                
                 System.out.print(bitset);
 
                 oos.writeObject(bitset);
-
+                oos.writeObject(-1);
             }
 
         }
-        oos.writeObject(-1);
+
     }
+
 }
