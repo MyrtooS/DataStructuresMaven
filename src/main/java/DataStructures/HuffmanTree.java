@@ -17,7 +17,7 @@ import java.util.PriorityQueue;
 
 /**
  *
- * @author 21771-21794
+ * @author it21771-it21794
  */
 public class HuffmanTree {
 
