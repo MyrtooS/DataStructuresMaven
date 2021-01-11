@@ -58,7 +58,8 @@ public class PrintTreeCode {
                     bitset.set(i);
                 }
             }
-           
+        
+        
             huffcodes.put(root.character, bitset);
             oos.writeObject(huffcodes);
 
