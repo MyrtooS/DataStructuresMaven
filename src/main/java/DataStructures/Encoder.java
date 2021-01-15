@@ -25,7 +25,8 @@ public class Encoder {
 
     public static HashMap<Character, BitSet> huffcodes = new HashMap<Character, BitSet>();
 
-    public static void Encode(File asciiFile, File codes, File output) throws FileNotFoundException, IOException, ClassNotFoundException {
+    public static File Encode(File asciiFile, File codes, File output) throws FileNotFoundException, IOException, ClassNotFoundException {
+
         if (output.length() != 0) {
             output.delete();
         }
@@ -53,5 +54,6 @@ public class Encoder {
 
         }
         oos.writeObject(-1);
+        return output;
     }
 }
