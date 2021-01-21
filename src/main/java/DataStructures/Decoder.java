@@ -43,7 +43,6 @@ public class Decoder {
               
                 BitSet bitset = (BitSet) obj;
                 
-                
                     char c = huffcodes.get(bitset);
                     System.out.print(c);
                     DataOutputStream output = new DataOutputStream(new FileOutputStream(Ascii));
