@@ -38,25 +38,20 @@ public class Decoder {
             huffcodes = (HashMap) obj;
 
             ObjectInputStream HuffmanInput = new ObjectInputStream(new FileInputStream(HuffFile));
-
+            //while(MapInput.available()<0){
             while ((obj = HuffmanInput.readObject()) != null) {
-
+              
                 BitSet bitset = (BitSet) obj;
-             
-                if (huffcodes.containsKey(bitset)){
+                
+                
                     char c = huffcodes.get(bitset);
                     System.out.print(c);
                     DataOutputStream output = new DataOutputStream(new FileOutputStream(Ascii));
                     output.write(c);
-                } else {
-                    char c = huffcodes.get(bitset);
-                    System.out.print(c);
-                    DataOutputStream output = new DataOutputStream(new FileOutputStream(Ascii));
-                    output.write(c);
-                    System.out.println("");
-                }
-
+                 
+                
             }
+         //   }
 
         } catch (Exception e) {
             e.printStackTrace();

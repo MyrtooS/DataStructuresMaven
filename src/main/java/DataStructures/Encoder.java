@@ -45,26 +45,19 @@ public class Encoder {
             for (int i = 0; i < line.length(); i++) {
 
                 char c = line.charAt(i);
-                //System.out.println(c);
-                BitSet bitset;
-                BitSet bitset2=new BitSet();
-                bitset2.set(0);
-                if (huffcodes.containsValue(c)) {
-                    bitset = (huffcodes.get(c));
+                
+                if (huffcodes.containsKey(c)) {
+                    BitSet bitset = (huffcodes.get(c));
                     oos.writeObject(bitset);
                     
-                    //System.out.print(bitset);
-                } else {
-                    //char c2 = '';
-                    oos.writeObject(bitset2);
-                    //oos.writeObject(bitset);
+                    
                 }
                 
 
             }
 
         }
-        oos.writeObject(-1);
-        return output;
+        oos.writeObject(null);
+                return output;
     }
 }
