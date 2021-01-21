@@ -32,6 +32,7 @@ public class DataStructures {
         for (String s : args) {
             File asciiFile = new File(args[0]);
             File outputFile = new File(args[1]);
+
             FileWrapper fileWrapper = new FileWrapper();
             File frequencies = fileWrapper.CountCharactersFile(asciiFile);
 
@@ -40,9 +41,15 @@ public class DataStructures {
 
             PrintTreeCode printTreeCode = new PrintTreeCode();
             File code = printTreeCode.treeCode(tree);
+            File code2 = printTreeCode.returnFile2();
 
             Encoder encoder = new Encoder();
-            encoder.Encode(asciiFile, code, outputFile);
+            File output = new File("output2");
+            File output2 = encoder.Encode(asciiFile, code, output);
+
+            Decoder decoder = new Decoder();
+
+            decoder.Decoder(output2, outputFile, code2);
         }
 
     }

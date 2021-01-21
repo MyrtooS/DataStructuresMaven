@@ -5,9 +5,12 @@
  */
 package DataStructures;
 
+import static DataStructures.Encoder.huffcodes;
+import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.util.ArrayList;
@@ -25,40 +28,40 @@ public class Decoder {
      */
 //    public static HashMap<Character, BitSet> huffInput = new HashMap<Character, BitSet>();
     public static ArrayList<Object> huffInput = new ArrayList<Object>();
-    
-    public static void main(String[] args) {
-        // TODO code application logic here
-        try {
-            for (String s : args) {
-                File HuffFile = new File(args[0]);
-                File ascii = new File(args[1]);
+    public static HashMap<BitSet, Character> huffcodes = new HashMap<BitSet, Character>();
 
-                ObjectInputStream HuffmanInput = new ObjectInputStream(new FileInputStream(HuffFile));
-                Object obj = HuffmanInput.readObject();
-                huffInput.add(obj);
-                for(Object object : huffInput){
-                    BitSet bitset = new BitSet();
-                    object = (BitSet) bitset;
-                    
-                    
-                    
-                    
-                
+    public static File Decoder(File HuffFile, File Ascii, File huffmanMap) {
+        try {
+
+            ObjectInputStream MapInput = new ObjectInputStream(new FileInputStream(huffmanMap));
+            Object obj = MapInput.readObject();
+            huffcodes = (HashMap) obj;
+
+            ObjectInputStream HuffmanInput = new ObjectInputStream(new FileInputStream(HuffFile));
+
+            while ((obj = HuffmanInput.readObject()) != null) {
+
+                BitSet bitset = (BitSet) obj;
+             
+                if (huffcodes.containsKey(bitset)){
+                    char c = huffcodes.get(bitset);
+                    System.out.print(c);
+                    DataOutputStream output = new DataOutputStream(new FileOutputStream(Ascii));
+                    output.write(c);
+                } else {
+                    char c = huffcodes.get(bitset);
+                    System.out.print(c);
+                    DataOutputStream output = new DataOutputStream(new FileOutputStream(Ascii));
+                    output.write(c);
+                    System.out.println("");
                 }
 
             }
+
         } catch (Exception e) {
             e.printStackTrace();
         }
-//         FileWrapper fileWrapper = new FileWrapper();
-//            File frequencies = fileWrapper.CountCharactersFile(asciiFile);
-//
-//            HuffmanTree huffmanTree = new HuffmanTree();
-//            File tree = huffmanTree.FileToNode(frequencies);
-//
-//        PrintTreeCode printTreeCode = new PrintTreeCode();
-//            File code = printTreeCode.treeCode(tree);
-
+        return Ascii;
     }
 
 }
